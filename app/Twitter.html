@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="JQ/jquery-1.11.1.min.js"></script>
+    <link href="JQ/jquery-mobile/jquery.mobile-1.4.3.css" rel="stylesheet" />
+    <script src="JQ/jquery-mobile/jquery.mobile-1.4.3.js"></script>
+    <link href="themes/c.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+    <script src="js/CtrLinks.js"></script>
+    <script src="js/validacion.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+
+    
+
+</head>
+<body>
+    <div data-role="header" data-position="fixed">
+        <center><img src="images/corazonfuerte1200x627.png" width="80px" height="40px" /></center>
+        <a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
+        <a href="#add-form" data-icon="gear" data-iconpos="notext">Add</a>
+    </div>
+
+
+    <div data-role="content">
+        <div><center><h2>Comparte contenido en Tus Redes Sociales</h2>
+
+                 <div id="twitter" class="ui-bar ui-bar-c ui-corner-all">
+
+                     <button onclick="window.plugins.socialsharing.share('Aprende mas acerca del control y prevención de enfermedades cardiovasculares con la app +Corazón disponible en todas las tiendas de apps!')">Compartir en:</button>
+                     <br />
+
+                     <a class="twitter-timeline" href="https://twitter.com/MasCorazonApp" data-widget-id="540244428615852032">Tweets por el @MasCorazonApp.</a>
+                     <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + "://platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs); } }(document, "script", "twitter-wjs");</script>
+                     <a href="https://twitter.com/intent/tweet?button_hashtag=#Cardiovascular&text=@MasCorazonApp Quiero Informar Acerca De La Prevencion De Enfermedades Cardiovasculares: " class="twitter-hashtag-button" data-lang="en" data-related="jasoncosta">Tweet #TwitterStories</a>
+                     <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = "https://platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs); } }(document, "script", "twitter-wjs");</script>
+                   
+                     <!-- unlike most apps Twitter doesn't like it when you use an array to pass multiple files as the second param -->
+                    
+                     
+                   
+                  </div>
+
+                   
+</center>
+                     
+                      
+
+</div>
+
+        </div>
+    <div data-theme="a" data-role="footer" data-position="fixed" class="footer">
+</div>
+
+    <div data-role="panel" data-position-fixed="true" data-display="overlay" data-theme="b" id="nav-panel">
+        <ul data-role="listview">
+            <li data-icon="delete"><a href="#" data-rel="close">Cerrar menu</a></li>
+            <li id="menu"><a href="">Inicio</a></li>
+            <li id="prevencion" data-icon="alert"><a href="">Aprende</a></li>
+            <li id="tips" data-icon="info"><a href="">Cuídate</a></li>
+            <li id="estadisticas" data-icon="arrow-u-r"><a href="">Compárate</a></li>
+            <li id="juego" data-icon="heart"><a href="">Diviértete</a></li>
+            <li id="test" data-icon="plus"><a href="">Evalúate</a></li>
+            <li id="tw2" data-icon="action"><a href="">Compartir</a></li>
+            <li id="AcercaDe" data-icon="star"><a href="">Acerca de</a></li>
+
+        </ul>
+    </div><!-- /panel -->
+    <div data-role="panel" data-position="right" data-position-fixed="true" data-display="overlay" data-theme="b" id="add-form">
+        <form class="userform">
+            <center>
+                <h3>Compartir</h3>
+            </center>
+
+            <div class="ui-grid-a">
+              
+                <center>
+
+
+                    <img src="images/share-icon.png" width="80px" id="tw" />
+
+                </center>
+
+                    <div class="ui-block-b"><a href="#" data-rel="close" id="cerrarsesion" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini">Cerrar sesión</a></div>
+
+            </div>
+        </form>
+    </div><!-- /panel -->
+       
+</body>
+</html>

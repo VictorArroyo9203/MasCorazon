@@ -1,0 +1,198 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <title></title>
+    <script src="JQ/jquery-1.11.1.min.js"></script>
+    <link href="JQ/jquery-mobile/jquery.mobile-1.4.3.css" rel="stylesheet" />
+    <script src="JQ/jquery-mobile/jquery.mobile-1.4.3.js"></script>
+    <link href="themes/c.css" rel="stylesheet" />
+    <script src="js/CtrLinks.js"></script>
+    <script src="js/CtrServices.js"></script>
+
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+    <script src="Mapas/gmaps.js"></script>
+    <link href="Mapas/styles.css" rel="stylesheet" />
+
+    <link href="css/stylesheet.css" rel="stylesheet" />
+    <link href="css/menu.css" rel="stylesheet" />
+    <link href="Estadisticas/style.css" rel="stylesheet" />
+    <script src="Estadisticas/amcharts.js"></script>
+    <script src="Estadisticas/serial.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).on("pageinit", "#panel-fixed-page1", function (event) {
+
+            cargarestadistica();
+        });
+
+
+        function cargarestadistica(){
+            $.ajax({
+                type: "POST",
+                url: "http://190.109.185.138:8086/Service1.svc/" + "Get_ResultadosC",
+                data: {},
+                contentType: "application/json; charset=utf-8",
+                dataType: "jsonp",
+                jsonpCallback: "Get_ResultadosC",
+                async: false,
+                success: function (result) {
+                    var chartData = (typeof result) == 'string' ? eval('(' + result + ')') : result;
+
+
+                    $.each(chartData, function (i, item) {
+                        if (item.porcentaje != 0) {
+                            AmCharts.ready(function () {
+                                // SERIAL CHART
+                                chart = new AmCharts.AmSerialChart();
+                                chart.dataProvider = chartData;
+                                chart.categoryField = "nombre";
+                                // the following two lines makes chart 3D
+                                chart.depth3D = 20;
+                                chart.angle = 30;
+
+                                // AXES
+                                // category
+                                var categoryAxis = chart.categoryAxis;
+                                categoryAxis.labelRotation = 90;
+                                categoryAxis.dashLength = 5;
+                                categoryAxis.gridPosition = "start";
+
+                                // value
+                                var valueAxis = new AmCharts.ValueAxis();
+                                valueAxis.title = "Porcentaje (%)";
+                                valueAxis.dashLength = 5;
+                                chart.addValueAxis(valueAxis);
+
+                                // GRAPH
+                                var graph = new AmCharts.AmGraph();
+                                graph.valueField = "porcentaje";
+                                graph.colorField = "color";
+                                graph.balloonText = "<span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>";
+                                graph.type = "column";
+                                graph.lineAlpha = 0;
+                                graph.fillAlphas = 1;
+                                chart.addGraph(graph);
+
+                                // CURSOR
+                                var chartCursor = new AmCharts.ChartCursor();
+                                chartCursor.cursorAlpha = 0;
+                                chartCursor.zoomable = false;
+                                chartCursor.categoryBalloonEnabled = false;
+                                chart.addChartCursor(chartCursor);
+
+                                chart.creditsPosition = "top-right";
+                                // WRITE
+                                chart.write("chartdiv");
+                            });
+                        }
+                    });
+
+
+
+
+                },
+                error: function (jqXHR, status, error) {
+                    alert(error + "-" + jqXHR.responseText);
+                }
+            });
+
+        }
+            
+
+    </script>
+    
+
+    <style>
+
+        h1 {
+            display: block;
+            font-size: 2em;
+            -webkit-margin-before: 0.67em;
+            -webkit-margin-after: 0.67em;
+            -webkit-margin-start: 0px;
+            -webkit-margin-end: 0px;
+            font-weight: bold;
+            font-family: action_manregular;
+            letter-spacing: 1px;
+        }
+    </style>
+
+</head>
+<body>
+
+    <!-- Start of first page -->
+    <div data-role="page" class="jqm-demos" id="panel-fixed-page1" data-title="Menú Principal">
+        <div data-role="header" data-position="fixed">
+            <center><img src="images/corazonfuerte1200x627.png" width="100px" height="40px" /></center>
+            <a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
+            <a href="#add-form" data-icon="user" data-iconpos="notext">Add</a>
+        </div><!-- /header -->
+
+       
+
+        <div role="main" class="ui-content jqm-content jqm-fullwidth">
+
+            <div data-role="content">
+                <br />
+                <div style="color: #ffffff; font-family: action_manregular;"><center><h1>+Compárate</h1></center> </div>
+              
+                <div style="color: #ffffff; font-family: action_manregular;"><center><h1>(%) De usuarios +Corazón con riesgo de enfermedad cardiovascular.</h1></center> </div>
+                	
+                <div id="Div1" class="ui-bar ui-bar-c ui-corner-all">
+                   
+
+                    <div id="chartdiv" style="width: 100%; height: 400px;">
+
+                       
+                    </div>
+
+                </div>
+
+            </div>
+        </div><!-- /content -->
+
+        <div data-role="panel" data-position-fixed="true" data-display="overlay" data-theme="b" id="nav-panel">
+            <ul data-role="listview">
+                <li data-icon="delete"><a href="#" data-rel="close">Cerrar menu</a></li>
+                <li id="menu"><a href="">Inicio</a></li>
+                <li id="prevencion" data-icon="alert"><a href="">Aprende</a></li>
+                <li id="tips" data-icon="info"><a href="">Cuídate</a></li>
+                <li id="estadisticas" data-icon="arrow-u-r"><a href="">Compárate</a></li>
+                <li id="juego" data-icon="heart"><a href="">Diviértete</a></li>
+                <li id="test" data-icon="plus"><a href="">Evalúate</a></li>
+                <li id="tw2" data-icon="action"><a href="">Compartir</a></li>
+                <li id="AcercaDe" data-icon="star"><a href="">Acerca de</a></li>
+
+            </ul>
+        </div>
+
+        <!-- /panel -->
+        <div data-role="panel" data-position="right" data-position-fixed="true" data-display="overlay" data-theme="b" id="add-form">
+            <form class="userform">
+                <center>
+                    <h3>Compartir</h3>
+                </center>
+
+                <div class="ui-grid-a">
+                    
+                        <center>
+                            <img src="images/share-icon.png" width="80px" id="tw" />
+                        </center>
+
+                        <div class="ui-block-b"><a href="#" data-rel="close" id="cerrarsesion" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini">Cerrar sesión</a></div>
+                </div>
+            </form>
+        </div><!-- /panel -->
+
+
+    </div><!-- /page -->
+ 
+
+</body>
+
+
+</html>

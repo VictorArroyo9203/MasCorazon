@@ -1,0 +1,400 @@
+﻿<!doctype html>
+<html>
+<head>
+
+    <script src="JQ/jquery-1.11.1.min.js"></script>
+    <link href="JQ/jquery-mobile/jquery.mobile-1.4.3.css" rel="stylesheet" />
+    <script src="JQ/jquery-mobile/jquery.mobile-1.4.3.js"></script>
+    <link href="themes/c.css" rel="stylesheet" />
+    <script src="js/CtrLinks.js"></script>
+    <script src="js/CtrServices.js"></script>
+    <script src="js/validacion.js"></script>
+    <link href="css/stylesheet.css" rel="stylesheet" />
+    <link href="css/menu.css" rel="stylesheet" />
+    <meta charset="utf-8">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  
+    <script type="text/javascript">
+        <!--
+        google_ad_client = "ca-pub-2783044520727903";
+        /* jQuery_demo */
+        google_ad_slot = "2780937993";
+        google_ad_width = 728;
+        google_ad_height = 90;
+        //-->
+    </script>
+    <script type="text/javascript"
+            src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+    </script>
+
+   
+    <script>
+        $(document).ready(function () {
+            $(".trigger").click(function () {
+                $(".menu").toggleClass("active");
+            });
+        });
+    </script>
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-36251023-1']);
+        _gaq.push(['_setDomainName', 'jqueryscript.net']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
+    <style>
+                *,
+                *:before,
+                *:after {
+                    -moz-box-sizing: border-box;
+                    box-sizing: border-box;
+                    margin: 0;
+                    padding: 0;
+                }
+
+                html,
+                body {
+                    height: 100%;
+                    overflow: hidden;
+                }
+
+               
+
+                .absolute-center,
+                .menu,
+                .menu .btn .fa,
+                .menu .btn.trigger .line {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    -webkit-transform: translateX(-50%) translateY(-50%);
+                    -ms-transform: translateX(-50%) translateY(-50%);
+                    transform: translateX(-50%) translateY(-50%);
+                }
+
+                .menu {
+                    width: 5em;
+                    height: 5em;
+                }
+
+                    .menu .btn {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 50%;
+                        background: rgba(255, 255, 255, 0.15);
+                        opacity: 0;
+                        z-index: -10;
+                        cursor: pointer;
+                        -webkit-transition: opacity 1s, z-index 0.3s, -webkit-transform 1s;
+                        transition: opacity 1s, z-index 0.3s, transform 1s;
+                        -webkit-transform: translateX(0);
+                        -ms-transform: translateX(0);
+                        transform: translateX(0);
+                    }
+
+                        .menu .btn .fa {
+                            font-size: 3em;
+                            -webkit-transition: color 0.3s;
+                            transition: color 0.3s;
+                        }
+
+                        .menu .btn:hover .fa {
+                            color: rgba(255, 255, 255, 0.7);
+                        }
+
+                        .menu .btn.trigger {
+                            opacity: 1;
+                            z-index: 100;
+                            cursor: pointer;
+                            -webkit-transition: -webkit-transform 0.3s;
+                            transition: transform 0.3s;
+                        }
+
+                            .menu .btn.trigger:hover {
+                                -webkit-transform: scale(1.2);
+                                -ms-transform: scale(1.2);
+                                transform: scale(1.2);
+                            }
+
+                                .menu .btn.trigger:hover .line {
+                                    background-color: rgba(255, 255, 255, 0.7);
+                                }
+
+                                    .menu .btn.trigger:hover .line:before,
+                                    .menu .btn.trigger:hover .line:after {
+                                        background-color: rgba(255, 255, 255, 0.7);
+                                    }
+
+                            .menu .btn.trigger .line {
+                                width: 60%;
+                                height: 6px;
+                                background: #000;
+                                border-radius: 6px;
+                                -webkit-transition: background-color 0.3s, height 0.3s, top 0.3s;
+                                transition: background-color 0.3s, height 0.3s, top 0.3s;
+                            }
+
+                                .menu .btn.trigger .line:before,
+                                .menu .btn.trigger .line:after {
+                                    content: "";
+                                    display: block;
+                                    position: absolute;
+                                    left: 0;
+                                    width: 100%;
+                                    height: 6px;
+                                    background: #000;
+                                    border-radius: 6px;
+                                    -webkit-transition: background-color 0.3s, -webkit-transform 0.3s;
+                                    transition: background-color 0.3s, transform 0.3s;
+                                }
+
+                                .menu .btn.trigger .line:before {
+                                    top: -12px;
+                                    -webkit-transform-origin: 15% 100%;
+                                    -ms-transform-origin: 15% 100%;
+                                    transform-origin: 15% 100%;
+                                }
+
+                                .menu .btn.trigger .line:after {
+                                    top: 12px;
+                                    -webkit-transform-origin: 25% 30%;
+                                    -ms-transform-origin: 25% 30%;
+                                    transform-origin: 25% 30%;
+                                }
+
+                    .menu .rotater {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        -webkit-transform-origin: 50% 50%;
+                        -ms-transform-origin: 50% 50%;
+                        transform-origin: 50% 50%;
+                    }
+
+                    .menu.active .btn-icon {
+                        opacity: 1;
+                        z-index: 10;
+                    }
+
+                    .menu.active .trigger .line {
+                        height: 0px;
+                        top: 45%;
+                    }
+
+                        .menu.active .trigger .line:before {
+                            -webkit-transform: rotate(45deg);
+                            -ms-transform: rotate(45deg);
+                            transform: rotate(45deg);
+                            width: 110%;
+                        }
+
+                        .menu.active .trigger .line:after {
+                            -webkit-transform: rotate(-45deg);
+                            -ms-transform: rotate(-45deg);
+                            transform: rotate(-45deg);
+                            width: 110%;
+                        }
+
+                /* horrible things are happening here
+        for some reason nth-child(1) is always busy and elements starting from 2 */
+
+                .rotater:nth-child(1) {
+                    -webkit-transform: rotate(-22.5deg);
+                    -ms-transform: rotate(-22.5deg);
+                    transform: rotate(-22.5deg);
+                }
+
+                .menu.active .rotater:nth-child(1) .btn-icon {
+                    -webkit-transform: translateX(-10em) rotate(22.5deg);
+                    -ms-transform: translateX(-10em) rotate(22.5deg);
+                    transform: translateX(-10em) rotate(22.5deg);
+                }
+
+                .rotater:nth-child(2) {
+                    -webkit-transform: rotate(22.5deg);
+                    -ms-transform: rotate(22.5deg);
+                    transform: rotate(22.5deg);
+                }
+
+                .menu.active .rotater:nth-child(2) .btn-icon {
+                    -webkit-transform: translateX(-10em) rotate(-22.5deg);
+                    -ms-transform: translateX(-10em) rotate(-22.5deg);
+                    transform: translateX(-10em) rotate(-22.5deg);
+                }
+
+                .rotater:nth-child(3) {
+                    -webkit-transform: rotate(67.5deg);
+                    -ms-transform: rotate(67.5deg);
+                    transform: rotate(67.5deg);
+                }
+
+                .menu.active .rotater:nth-child(3) .btn-icon {
+                    -webkit-transform: translateX(-10em) rotate(-67.5deg);
+                    -ms-transform: translateX(-10em) rotate(-67.5deg);
+                    transform: translateX(-10em) rotate(-67.5deg);
+                }
+
+                .rotater:nth-child(4) {
+                    -webkit-transform: rotate(112.5deg);
+                    -ms-transform: rotate(112.5deg);
+                    transform: rotate(112.5deg);
+                }
+
+                .menu.active .rotater:nth-child(4) .btn-icon {
+                    -webkit-transform: translateX(-10em) rotate(-112.5deg);
+                    -ms-transform: translateX(-10em) rotate(-112.5deg);
+                    transform: translateX(-10em) rotate(-112.5deg);
+                }
+
+                .rotater:nth-child(5) {
+                    -webkit-transform: rotate(157.5deg);
+                    -ms-transform: rotate(157.5deg);
+                    transform: rotate(157.5deg);
+                }
+
+                .menu.active .rotater:nth-child(5) .btn-icon {
+                    -webkit-transform: translateX(-10em) rotate(-157.5deg);
+                    -ms-transform: translateX(-10em) rotate(-157.5deg);
+                    transform: translateX(-10em) rotate(-157.5deg);
+                }
+
+                .rotater:nth-child(6) {
+                    -webkit-transform: rotate(202.5deg);
+                    -ms-transform: rotate(202.5deg);
+                    transform: rotate(202.5deg);
+                }
+
+                .menu.active .rotater:nth-child(6) .btn-icon {
+                    -webkit-transform: translateX(-10em) rotate(-202.5deg);
+                    -ms-transform: translateX(-10em) rotate(-202.5deg);
+                    transform: translateX(-10em) rotate(-202.5deg);
+                }
+
+                .rotater:nth-child(7) {
+                    -webkit-transform: rotate(247.5deg);
+                    -ms-transform: rotate(247.5deg);
+                    transform: rotate(247.5deg);
+                }
+
+                .menu.active .rotater:nth-child(7) .btn-icon {
+                    -webkit-transform: translateX(-10em) rotate(-247.5deg);
+                    -ms-transform: translateX(-10em) rotate(-247.5deg);
+                    transform: translateX(-10em) rotate(-247.5deg);
+                }
+
+                .rotater:nth-child(8) {
+                    -webkit-transform: rotate(292.5deg);
+                    -ms-transform: rotate(292.5deg);
+                    transform: rotate(292.5deg);
+                }
+
+                .menu.active .rotater:nth-child(8) .btn-icon {
+                    -webkit-transform: translateX(-10em) rotate(-292.5deg);
+                    -ms-transform: translateX(-10em) rotate(-292.5deg);
+                    transform: translateX(-10em) rotate(-292.5deg);
+                }
+
+                .rotater:nth-child(9) {
+                    -webkit-transform: rotate(337.5deg);
+                    -ms-transform: rotate(337.5deg);
+                    transform: rotate(337.5deg);
+                }
+
+                .menu.active .rotater:nth-child(9) .btn-icon {
+                    -webkit-transform: translateX(-10em) rotate(-337.5deg);
+                    -ms-transform: translateX(-10em) rotate(-337.5deg);
+                    transform: translateX(-10em) rotate(-337.5deg);
+                }
+    </style>
+</head>
+
+<body>
+
+    <div data-role="page" class="ui-responsive-panel" id="panel-fixed-page1" data-title="Menú Principal" data-url="panel-fixed-page1">
+        <div data-role="header" data-position="fixed">
+            <center><img src="images/corazonfuerte1200x627.png" width="80px" height="40px" /></center>
+            <a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
+            <a href="#add-form" data-icon="user" data-iconpos="notext">Add</a>
+        </div><!-- /header -->
+
+        <div class="jquery-script-ads" align="center">
+
+        </div>
+        <div class="menu">
+            <div class="btn trigger"> <span class="line"></span> </div>
+            <div class="rotater">
+                <div class="btn btn-icon"> <img src="images/prevencion.png" width="80" id="prevencion2" /></div>
+            </div>
+
+                       <div class="rotater">
+                    <div class="btn btn-icon"> <img src="images/estadisticas.png" width="80" id="estadisticas2" /> </div>
+                </div>
+
+            <div class="rotater">
+                <div class="btn btn-icon"> <img src="images/juegos.png" width="80" id="juego2" /> </div>
+            </div>
+            <div class="rotater">
+                <div class="btn btn-icon"> <img src="images/tips.png" width="80" id="tips2" /> </div>
+            </div>
+            <div class="rotater">
+                <div class="btn btn-icon"><img src="images/test.png" width="80" id="test2" /></div>
+            </div>
+            <div class="rotater">
+                <div class="btn btn-icon"> <img src="images/social.png" width="80" id="social" /></div>
+            </div>
+            <div class="rotater">
+                <div class="btn btn-icon"> <i class="fa fa-github"></i> </div>
+            </div>
+            <div class="rotater">
+                <div class="btn btn-icon"> <i class="fa fa-linkedin"></i> </div>
+            </div>
+        </div>
+        <div data-role="panel" data-position-fixed="true" data-display="overlay" data-theme="b" id="nav-panel">
+            <ul data-role="listview">
+                <li data-icon="delete"><a href="#" data-rel="close">Cerrar menu</a></li>
+                <li id="prevencion" data-icon="alert"><a href="">Aprende</a></li>
+                <li id="tips" data-icon="info"><a href="">Cuídate</a></li>
+                <li id="estadisticas" data-icon="arrow-u-r"><a href="">Compárate</a></li>
+                <li id="juego" data-icon="heart"><a href="">Diviértete</a></li>
+                <li id="test" data-icon="plus"><a href="">Evalúate</a></li>
+                <li id="tw2" data-icon="action"><a href="">Compartir</a></li>
+                <li id="AcercaDe" data-icon="star"><a href="">Acerca de</a></li>
+
+            </ul>
+        </div><!-- /panel -->
+        <div data-role="panel" data-position="right" data-position-fixed="true" data-display="overlay" data-theme="b" id="add-form">
+            <form class="userform">
+                <center>
+                    <h3>Compartir</h3>
+                </center>
+
+                <div class="ui-grid-a">
+                    <center>
+                        <div>
+
+
+                            <img src="images/share-icon.png" width="100px" id="tw" />
+                        </div>
+
+                        <div class="ui-block-b"><a data-rel="close" id="cerrarsesion" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini">Cerrar sesión</a></div>
+
+                    </center>
+                </div>
+            </form>
+        </div><!-- /panel -->
+    </div>
+</body>
+</html>

@@ -1,0 +1,468 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="JQ/jquery-1.11.1.min.js"></script>
+    <link href="JQ/jquery-mobile/jquery.mobile-1.4.3.css" rel="stylesheet" />
+    <script src="JQ/jquery-mobile/jquery.mobile-1.4.3.js"></script>
+    <link href="themes/c.css" rel="stylesheet" />
+    <link href="js/pgwmodal.css" rel="stylesheet" />
+    <script src="js/jquery.ui.datepicker.js"></script>
+    <script src="js/jquery.mobile.datepicker.js"></script>
+    <script src="js/CtrLinks.js"></script>
+    <script src="js/pgwmodal.js"></script>
+    <script src="js/validacion.js"></script>
+    <link href="css/stylesheet.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="js/jquery-ui.css" />
+
+    <script>
+      
+        $(document).ready(function () {
+
+            consultarEncuesta();
+
+        });
+
+        function consultarEncuesta() {
+            var url = "http://190.109.185.138:8051/"
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: {
+
+                }
+            })
+                            .done(function (msg) {
+
+                                $("#encuestaList").append(msg);
+                                $('#encuestaList').trigger('create');
+                                $('#encuesta').show();
+                                $("#cantidad").hide();
+
+                            });
+
+
+        }
+
+        function todo() {
+
+            campos_vaciostest();
+            
+        }
+
+        function campos_vaciostest() {
+            if (document.myform.fecha.value == null || document.myform.fecha.value.length < 3 || /^\s+$/.test(document.myform.fecha.value)) {
+                alert("Introduce un fecha...");
+                //document.myform.Nombre.value = "";
+                document.myform.fecha.focus()
+                return false;
+            }
+            if (document.myform.presion.value == null || document.myform.presion.value.length < 3 || /^\s+$/.test(document.myform.presion.value)) {
+                alert("Introduce la presión...");
+                //document.myform.Apellido.value = "";
+                document.myform.presion.focus()
+                return false;
+            }
+            if (document.myform.glucosa.value == null || document.myform.glucosa.value.length < 3 || /^\s+$/.test(document.myform.glucosa.value)) {
+                alert("Introduce la glucosa");
+                //document.myform.Documento.value = "";
+                document.myform.glucosa.focus()
+                return false;
+            }
+
+            if (document.myform.hdl.value == null || document.myform.hdl.value.length < 3 || /^\s+$/.test(document.myform.hdl.value)) {
+                alert("Introduce  la hdl...");
+                //document.getElementById("document.myform.Clave.value");
+                document.myform.hdl.focus()
+                return false;
+            }
+
+            if (document.myform.trigliceridos.value == null || document.myform.trigliceridos.value.length < 3 || /^\s+$/.test(document.myform.trigliceridos.value)) {
+                alert("Introduce  el valor de trigliceridos...");
+                //document.getElementById("document.myform.Clave.value");
+                document.myform.trigliceridos.focus()
+                return false;
+            }
+
+            else {
+
+                calcularEncuesta2();
+            }
+        }
+
+    
+
+        function calcularEncuesta2() {
+            var trig = $("#trigliceridos").val();
+            var hdl = $("#hdl").val();
+            var glucosa = $("#glucosa").val();
+            var presion = $("#presion").val();
+
+            $("#mensaje").html("<ul>");
+            var msj = "<ul>";
+            if (presion <= 90) {
+                msj = msj + "<li>Presión: Presión arterial normal, Saludable.</li>";
+            } else if (presion > 90 && presion <= 94) {
+                msj = msj + "<li>Presión: Pre hipertension, Habla Con tu Pediatra.</li>";
+            } else if (presion > 94 && presion <= 98) {
+                msj = msj + "<li>Presión: Hipertension1, Habla Con tu Pediatra.</li>";
+            } else if (presion > 98) {
+                msj = msj + "<li>Presión: Hipertension2, Habla Con tu Pediatra.</li>";
+            }
+
+
+            if (glucosa <= 200) {
+                msj = msj + "<li>Glucosa: Glicemia Normal, Saludable.</li>";
+            } else {
+                msj = msj + "<li>Glucosa: Glicemia Glicemia Alta, Habla con tu Pediatra.</li>";
+            }
+
+            if (trig <= 150) {
+                msj = msj + "<li>Trigliceridos: Normal, Saludable.</li>";
+            } else {
+                msj = msj + "<li>Trigliceridos: Elevado, Habla con tu Pediatra.</li>";
+            }
+
+            if (hdl <= 35) {
+                msj = msj + "<li>Colesterol: Bajo, Habla con tu Pediatra.</li>";
+            } if (hdl > 35 && hdl <= 110) {
+                msj = msj + "<li>Colesterol: Normal, Saludable.</li>";
+            } if (hdl > 110 && hdl <= 130) {
+                msj = msj + "<li>Colesterol: Limitrofe, Habla con tu Pediatra.</li>";
+            } if (hdl > 130) {
+                msj = msj + "<li>Colesterol: Elevado, Habla con tu Pediatra.</li>";
+            }
+
+            msj = msj + "</ul>";
+            localStorage.setItem("respTest", msj);
+            var url = "respuestaTest.html";
+            $(location).attr('href', url);
+            
+        }
+
+        function calcular() {
+
+            var cantidad = $("#cantidad").val();
+            var array = new Array();
+            for (var i = 0 ; i < cantidad; i++) {
+                j = i + 1;
+                array[i] = $("#select-custom-" + j).val();
+            }
+
+            var respuestas = JSON.stringify(array);
+            var data = {
+                cantidad: cantidad,
+                respuestas: respuestas,
+                altura: $("#altura").val(),
+                peso: $('#peso').val()
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "http://190.109.185.138:8051/?leer=administrador/calcularTest",
+                data: data
+            })
+                    .done(function (msg) {
+
+                        var json = eval("(" + msg + ")");
+
+                        if (json.msj == "exito") {
+
+                            localStorage.setItem("respTest", json.html);
+                            $("#propenso").val(json.propenso);
+                            ActualizarPropenso();
+                            var url = "respuestaTest.html";
+                            $(location).attr('href', url);
+                        } else if (json.msj == "error") {
+
+                            $("#btnPopup").click();
+                            $("#popupMsj").html("<p>Error al Calcular Test</p>");
+
+                        }
+                    });
+
+
+        }
+    </script>
+
+    <style type="text/css">
+        label.error {
+            color: red;
+            font-size: 16px;
+            font-weight: normal;
+            line-height: 1.4;
+            margin-top: 0.5em;
+            width: 100%;
+            float: none;
+        }
+
+        @media screen and (orientation: portrait) {
+            label.error {
+                margin-left: 0;
+                display: block;
+            }
+        }
+
+        @media screen and (orientation: landscape) {
+            label.error {
+                display: inline-block;
+                margin-left: 22%;
+            }
+        }
+
+        em {
+            color: red;
+            font-weight: bold;
+            padding-right: .25em;
+        }
+    </style>
+
+</head>
+<body>
+
+    <!-- Start of first page -->
+    <div data-role="page" class="jqm-demos" id="panel-fixed-page1" data-title="Evaluate" data-url="panel-fixed-page1">
+        <div data-role="header" data-position="fixed">
+            <center><img src="images/corazonfuerte1200x627.png" width="100px" height="40px" /></center>
+            <a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
+            <a href="#add-form" data-icon="gear" data-iconpos="notext">Add</a>
+        </div><!-- /header -->
+
+        <div data-role="navbar" data-iconpos="left">
+            <ul>
+                <li><a href="#panel-fixed-page1" data-icon="eye" data-theme="c" id="estidisticas5">Encuestas de hábitos</a></li>
+                <li><a href="#pagina1" data-icon="edit" data-theme="c" id="">Información biometrica</a></li>
+            </ul>
+        </div><!-- /navbar -->
+
+        <div role="main" class="ui-content jqm-content jqm-fullwidth">
+            <a href="#popupMsj" id="btnPopup" hidden=hidden data-rel="popup" data-position-to="window" data-transition="flow" style="background-color: #84aa1f; color: white; text-decoration: none;text-shadow: none" class="ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-right boton">Aceptar</a>
+
+            <div data-role="popup" id="popupMsj" data-overlay-theme="b" data-theme="b" class="ui-corner-all" data-dismissible="false">
+
+                <div style="padding:10px 20px;">
+                    <a href="#" data-rel="back" id="closeLogin" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+                    <h2>Resultados</h2>
+                    <div id="mensaje"></div>
+                </div>
+
+            </div>
+            <div data-role="content">
+
+                <div style="color: #ffffff; font-family: action_manregular;"><center><h1>+Evalúate</h1></center> </div>
+
+                <div data-role="collapsibleset" data-theme="b" data-content-theme="c" id="encuesta" hidden=hidden>
+
+                    <div data-role="collapsible">
+                        <h3>Indice de masa corpotal (IMC)</h3>
+
+                        <input name="username" id="username" style="display:none" />
+                        <input name="propenso" id="propenso" style="display:none" />
+                        <center><label for="text-1">Escribe tu Fecha de nacimiento:</label></center>
+                        <input type="date" data-clear-btn="true" name="name3" id="fecha" value="" placeholder="Fecha de nacimiento" />
+                        <center><label for="text-1">Sexo:</label></center>
+                        <select name="select-native-17" id="sexo">
+                            <option value="Masculino">Masculino</option>
+                            <option value="Femenino">Femenino</option>
+                        </select>
+                        <center><label for="text-1">Escribe tu ALTURA actual (cm):</label></center>
+
+                        <div class="ui-field-contain">
+                            <input name="altura" id="altura" type="number" />
+                        </div>
+
+                        <center><label for="text-1">Escribe tu PESO actual (kl):</label></center>
+
+                        <div class="ui-field-contain">
+                            <input name="peso" id="peso" type="number" />
+                        </div>
+
+                    </div>
+                    <div id="encuestaList">
+
+                    </div>
+                    <br />
+                    <input id="" onclick="calcular()" type="submit" value="Registrar encuesta" />
+
+                </div>
+
+
+            </div>
+        </div><!-- /content -->
+
+        <div data-role="panel" data-position-fixed="true" data-display="overlay" data-theme="b" id="nav-panel">
+            <ul data-role="listview">
+                <li data-icon="delete"><a href="#" data-rel="close">Cerrar menu</a></li>
+                <li id="menu"><a href="">Inicio</a></li>
+                <li id="prevencion" data-icon="alert"><a href="">Aprende</a></li>
+                <li id="tips" data-icon="info"><a href="">Cuídate</a></li>
+                <li id="estadisticas" data-icon="arrow-u-r"><a href="">Compárate</a></li>
+                <li id="juego" data-icon="heart"><a href="">Diviértete</a></li>
+                <li id="test" data-icon="plus"><a href="">Evalúate</a></li>
+                <li id="AcercaDe" data-icon="star"><a href="">Acerca de</a></li>
+
+            </ul>
+        </div>
+
+        <!-- /panel -->
+        <div data-role="panel" data-position="right" data-position-fixed="true" data-display="overlay" data-theme="b" id="add-form">
+            <form class="userform">
+                <center>
+                    <h3>Compartir</h3>
+                </center>
+
+                <div class="ui-grid-a">
+                    <center>
+                        <div>
+                            <img src="images/facebook.png" id="fb" />
+                            <img src="images/twitter.png" id="tw" />
+                            <img src="images/googleplus.png" id="google" />
+                        </div>
+
+                        <div class="ui-block-b"><a href="#" data-rel="close" id="cerrarsesion" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini">Cerrar sesión</a></div>
+
+                    </center>
+                </div>
+            </form>
+        </div><!-- /panel -->
+
+
+    </div><!-- /page -->
+    <!-- Start of second page -->
+    <div data-role="page" class="jqm-demos" id="pagina1" data-title="Registrar Usuarios" data-url="panel-fixed-page1">
+        <div data-role="header" data-position="fixed">
+            <center><img src="images/corazonfuerte1200x627.png" width="80px" height="40px" /></center>
+            <a href="#nav-panel2" data-icon="bars" data-iconpos="notext">Menu</a>
+            <a href="#add-form2" data-icon="user" data-iconpos="notext">Add</a>
+        </div><!-- /header -->
+        <div data-role="navbar" data-iconpos="left">
+            <ul>
+                <li><a href="#panel-fixed-page1" data-icon="eye" data-theme="c" id="estidisticas5">Encuestas sobre hábitos</a></li>
+                <li><a href="#pagina1" data-icon="edit" data-theme="c" id="">Información biometrica</a></li>
+            </ul>
+        </div><!-- /navbar -->
+
+        <div role="main" class="ui-content jqm-content jqm-fullwidth">
+
+            <a href="#popupMsj2" id="btnPopup2" hidden=hidden data-rel="popup" data-position-to="window" data-transition="flow" style="background-color: #84aa1f; color: white; text-decoration: none;text-shadow: none" class="ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-right boton">Aceptar</a>
+
+            <div data-role="popup" id="popupMsj2" data-overlay-theme="b" data-theme="b" class="ui-corner-all" data-dismissible="false">
+
+                <div style="padding:10px 20px;">
+                    <a href="#" data-rel="back" id="closeLogin" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+                    <h2>Resultados</h2>
+                    <div id="mensaje2"></div>
+                </div>
+
+            </div>
+
+            <div data-role="content">
+                <div id="Div1" class="ui-bar ui-bar-c ui-corner-all">
+
+                    <form method="get" name="myform" onsubmit="return formulario(this)">
+                        <input type="date" data-clear-btn="true" name="name3" id="fecha" value="" placeholder="Fecha de nacimiento" />
+                        <input type="text" name="name3" id="presion" value="" data-clear-btn="true" placeholder="Presión Arterial mmHg" />
+                        <input type="text" name="name3" id="glucosa" value="" data-clear-btn="true" placeholder="Glucosa (mg/dL)" />
+                        <input type="text" name="name3" id="hdl" value="" data-clear-btn="true" placeholder="HDL (mg/dL)" />
+                        <input type="text" name="name3" id="trigliceridos" value="" data-clear-btn="true" placeholder="Trigliceridos (m/dL)" />
+
+                        <select name="select-native-17" id="select1">
+                            <option value="Masculino">Masculino</option>
+                            <option value="Femenino">Femenino</option>
+                        </select>
+
+
+
+                        <br />
+                        <input id="enc2" onclick="todo()" type="button" value="Registrar Encuesta" />
+
+
+
+                        <br />
+
+                    </form></div>
+
+            </div>
+
+        </div><!-- /content -->
+        <div data-role="panel" data-position-fixed="true" data-display="overlay" data-theme="b" id="nav-panel2">
+            <ul data-role="listview">
+                <li data-icon="delete"><a href="#" data-rel="close">Cerrar menu</a></li>
+                <li id="menu2"><a href="">Inicio</a></li>
+                <li id="prevencion2" data-icon="alert"><a href="">Aprende</a></li>
+                <li id="tips2" data-icon="info"><a href="">Cuídate</a></li>
+                <li id="estadisticas2" data-icon="arrow-u-r"><a href="">Compárate</a></li>
+                <li id="juego2" data-icon="heart"><a href="">Diviértete</a></li>
+                <li id="test2" data-icon="plus"><a href="">Evalúate</a></li>
+                <li id="AcercaDe2" data-icon="star"><a href="">Acerca de</a></li>
+
+            </ul>
+        </div>
+
+        <!-- /panel -->
+        <div data-role="panel" data-position="right" data-position-fixed="true" data-display="overlay" data-theme="b" id="add-form2">
+            <form class="userform">
+                <center>
+                    <h3>Compartir</h3>
+                </center>
+
+                <div class="ui-grid-a">
+                    <center>
+                        <div>
+                            <img src="images/facebook.png" id="fb2" />
+                            <img src="images/twitter.png" id="tw2" />
+                            <img src="images/googleplus.png" id="google2" />
+                        </div>
+
+                        <div class="ui-block-b"><a href="#" data-rel="close" id="cerrarsesion" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini">Cerrar sesión</a></div>
+
+                    </center>
+                </div>
+            </form>
+
+        </div><!-- /panel -->
+    </div><!-- /page -->
+    <script>
+
+        $(document).ready(function () {
+            $("#btnPopup").hide();
+            $("#btnPopup2").hide();
+        });
+
+        function ActualizarPropenso() {
+
+            var _Cl = {};
+            _Cl.email = localStorage.getItem('User');
+            _Cl.propenso = $("#propenso").val(); //aqui va la variable donde tu guardas si el test que hizo la persona es "s" o "n"
+
+            $.ajax({
+                cache: false,
+                type: "POST",
+                url: "http://190.109.185.138:8086/Service1.svc/" + "Update_Usuarios",
+                data: { 'Cl': JSON.stringify(_Cl) },
+                contentType: "application/json; charset=utf-8",
+                dataType: "jsonp",
+                jsonpCallback: "Update_Usuarios",
+                async: false,
+                success: function (result) {
+
+                    //alert("Actualizado");
+                    //alert(localStorage.getItem('User'));
+
+
+                },
+                error: function (jqXHR, status, error) {
+                    alert(error + "-" + jqXHR.responseText);
+                }
+            });
+
+        }
+    </script>
+
+</body>
+
+
+</html>

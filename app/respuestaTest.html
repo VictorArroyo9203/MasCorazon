@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="JQ/jquery-1.11.1.min.js"></script>
+    <link href="JQ/jquery-mobile/jquery.mobile-1.4.3.css" rel="stylesheet" />
+    <script src="JQ/jquery-mobile/jquery.mobile-1.4.3.js"></script>
+    <link href="themes/c.css" rel="stylesheet" />
+    <script src="js/jquery.ui.datepicker.js"></script>
+    <script src="js/jquery.mobile.datepicker.js"></script>
+    <script src="js/CtrServices.js"></script>
+    <script src="js/CtrLinks.js"></script>
+    <script src="js/valke.js"></script>
+    <link rel="stylesheet" type="text/css" href="js/jquery-ui.css" />
+
+
+
+
+    <script>
+
+        $(document).on("pageinit", "#pagina2", function (event) {
+            $('#Dato').append(localStorage.getItem("respTest"));
+        });
+
+    </script>
+
+
+</head>
+<body>
+
+
+    <div data-role="page" class="jqm-demos" id="pagina2" data-title="Menú Principal" data-dialog="true">
+
+
+
+        <div data-role="header" data-theme="b">
+            <h1>Actividad Física</h1>
+        </div>
+
+        <div role="main" class="ui-content">
+
+            <div id="Dato">
+
+            </div>
+
+
+        </div>
+
+
+
+    </div><!-- /page -->
+</body>
+</html>

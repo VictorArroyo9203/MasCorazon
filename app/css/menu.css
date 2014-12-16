@@ -1,0 +1,82 @@
+ .mainMenuIcon {
+            display: block;
+            position: relative;
+            float: left;
+            text-align: center;
+        }
+
+            .mainMenuIcon a.ui-link,
+            .mainMenuIcon a.ui-link:visited,
+            .mainMenuIcon a.ui-link:hover,
+            .mainMenuIcon a.ui-link:active {
+                color: #4E4E4E;
+                font-weight: normal;
+                text-decoration: none;
+            }
+
+        @media screen and (max-width:1921px) {
+            .mainMenuIcon {
+                width: 115px;
+                height: 184px;
+            }
+
+                .mainMenuIcon img {
+                    width: 112px;
+                }
+
+                .mainMenuIcon a.ui-link,
+                .mainMenuIcon a.ui-link:visited,
+                .mainMenuIcon a.ui-link:hover,
+                .mainMenuIcon a.ui-link:active {
+                    font-size: 20px;
+                }
+        }
+
+        @media screen and (max-width:481px) {
+            .mainMenuIcon {
+                width: 115px;
+                height: 100px;
+            }
+
+                .mainMenuIcon img {
+                    width: 64px;
+                }
+
+                .mainMenuIcon a.ui-link,
+                .mainMenuIcon a.ui-link:visited,
+                .mainMenuIcon a.ui-link:hover,
+                .mainMenuIcon a.ui-link:active {
+                    font-size: 14px;
+                }
+        }
+
+#content {
+    /* width: 500px; */
+    max-width: 245px;
+    margin: auto;
+    min-width: 240px;
+      }
+      
+      #content2{
+          width: 100%;
+      }
+      .menuAprende{
+          list-style: none;
+          width: 100%;
+      }
+      
+      .menuAprende li{
+          width: 100%;
+          background-color: #4285a7;
+          overflow: hidden;
+          border-bottom: 2px solid white;
+      }
+      
+      .menuAprende img{
+          padding: 10px;
+          width: 50px;
+          
+      }
+      .menuAprende p{
+          padding-top: 8px;
+      }

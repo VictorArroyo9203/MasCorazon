@@ -1,0 +1,171 @@
+﻿<!DOCTYPE html>
+ 
+<html lang="es">
+ 
+<head>
+<title>Titulo de la web</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="css/styles.css" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="alternate" title="Pozolería RSS" type="application/rss+xml" href="/feed.rss" />
+<link type="text/css" href="css/jquery-ui-1.9.2.custom.css" rel="Stylesheet" id="linkestilo">
+<link rel="stylesheet" href="css/jquery.alerts.css" />
+
+<script src="js/jquery-1.7.1.min.js"></script>
+<script src="js/jquery.alerts.js"></script>
+<script src="js/jquery-ui-1.9.2.custom.js"></script>
+<script src="js/jquery.ui.touch-punch.js"></script>
+<script src="js/juego.js"></script>
+
+<script type="text/javascript">
+	function openItems(val) {
+		$("#items").fadeOut(500, function() {
+			$("#"+val+".page1").fadeIn(500);
+		});
+	}
+
+	function closeItems(val) {
+		$("#"+val+".page1").fadeOut(500, function() {
+			$("#items").fadeIn(500);
+		});
+	}
+
+	function moveRight(sig) {
+		act = sig-1;
+		$("#fisica.page"+act).fadeOut(500, function() {
+			$("#fisica.page"+sig).fadeIn(500);
+		});
+		
+	}
+
+	function moveLeft(sig) {
+		act = sig+1;
+		$("#fisica.page"+act).fadeOut(500, function() {
+			$("#fisica.page"+sig).fadeIn(500);
+		});
+	}
+
+	function inicio(){
+	   
+
+	        url = "../Menu.html";
+	        $(location).attr('href', url);
+	    
+
+	}
+
+	function moveRightN(sig) {
+		act = sig-1;
+		$("#nutricion.page"+act).fadeOut(500, function() {
+			$("#nutricion.page"+sig).fadeIn(500);
+		});
+		
+	}
+
+	function moveLeftN(sig) {
+		act = sig+1;
+		$("#nutricion.page"+act).fadeOut(500, function() {
+			$("#nutricion.page"+sig).fadeIn(500);
+		});
+	}
+
+
+	function updateVida (val) {
+		$(".progress-bar span").css('width',val+"%");
+		if (val>65) {
+			$( "#bar" ).removeClass( "green" );
+			$( "#bar" ).removeClass( "orange" );
+			$( "#bar" ).removeClass( "red" );
+			$( "#bar" ).addClass( "green" );
+		} else if(val<30) {
+			$( "#bar" ).removeClass( "green" );
+			$( "#bar" ).removeClass( "orange" );
+			$( "#bar" ).removeClass( "blue" );
+			$( "#bar" ).addClass( "red" );
+		} else if (val>=50) {
+			$( "#bar" ).removeClass( "green" );
+			$( "#bar" ).removeClass( "blue" );
+			$( "#bar" ).removeClass( "red" );
+			$( "#bar" ).addClass( "orange" );
+		}
+	}
+</script>
+
+</head>
+ 
+<body>
+	<section class="items">
+       <article>
+       		<!-- Fisica -->
+       		<div id="fisica" class="page1">
+       			<img src="img/left.png" style="max-width:15%;height:auto;" onclick="closeItems('fisica');">
+       			<img src="src/fisica/item_1.png" style="max-width:15%;height:auto;" class="arrastrable" id="bueno">
+	       		<img src="src/fisica/item_2.png" style="max-width:15%;height:auto;" class="arrastrable">
+	       		<img src="src/fisica/item_3.png" style="max-width:15%;height:auto;" class="arrastrable" id="bueno">
+	       		<img src="src/fisica/item_4.png" style="max-width:15%;height:auto;" class="arrastrable" id="bueno">  
+	       		<img src="img/right.png" style="max-width:15%;height:auto;" onclick="moveRight(2);">     			
+       		</div>
+       		<div id="fisica" class="page2">
+       			<img src="img/left.png" style="max-width:15%;height:auto;" onclick="moveLeft(1);">
+       			<img src="src/fisica/item_6.png" style="max-width:15%;height:auto;" class="arrastrable" id="malo">
+	       		<img src="src/fisica/item_7.png" style="max-width:15%;height:auto;" class="arrastrable" id="malo">
+	       		<img src="src/fisica/item_8.png" style="max-width:15%;height:auto;" class="arrastrable" id="bueno">
+	       		<img src="src/fisica/item_9.png" style="max-width:15%;height:auto;" class="arrastrable" id="malo">  
+	       		<img src="img/right.png" style="max-width:15%;height:auto;" onclick="moveRight(3);">     			
+       		</div>
+       		<div id="fisica" class="page3">
+       			<img src="img/left.png" style="max-width:15%;height:auto;" onclick="moveLeft(2);">
+       			<img src="src/fisica/item_10.png" style="max-width:15%;height:auto;" class="arrastrable" id="malo">
+	       		<img src="src/fisica/item_5.png" style="max-width:15%;height:auto;" class="arrastrable" id="malo"> 
+       		</div>
+
+       		<!-- Nutricion -->
+       		<div id="nutricion" class="page1">
+       			<img src="img/left.png" style="max-width:15%;height:auto;" onclick="closeItems('nutricion');">
+       			<img src="src/nutricion/item_11.png" style="max-width:15%;height:auto;" class="arrastrable" id="bueno">
+	       		<img src="src/nutricion/item_12.png" style="max-width:15%;height:auto;" class="arrastrable" id="malo">
+	       		<img src="src/nutricion/item_13.png" style="max-width:15%;height:auto;" class="arrastrable" id="bueno">
+	       		<img src="src/nutricion/item_14.png" style="max-width:15%;height:auto;" class="arrastrable" id="malo">  
+	       		<img src="img/right.png" style="max-width:15%;height:auto;" onclick="moveRightN(2);">     			
+       		</div>
+       		<div id="nutricion" class="page2">
+       			<img src="img/left.png" style="max-width:15%;height:auto;" onclick="moveLeftN(1);">
+       			<img src="src/nutricion/item_16.png" style="max-width:15%;height:auto;" class="arrastrable" id="bueno">
+	       		<img src="src/nutricion/item_17.png" style="max-width:15%;height:auto;" class="arrastrable" id="malo">
+	       		<img src="src/nutricion/item_18.png" style="max-width:15%;height:auto;" class="arrastrable" id="bueno">
+	       		<img src="src/nutricion/item_19.png" style="max-width:15%;height:auto;" class="arrastrable" id="malo">  
+	       		<img src="img/right.png" style="max-width:15%;height:auto;" onclick="moveRightN(3);">     			
+       		</div>
+       		<div id="nutricion" class="page3">
+       			<img src="img/left.png" style="max-width:15%;height:auto;" onclick="moveLeftN(2);">
+       			<img src="src/nutricion/item_20.png" style="max-width:15%;height:auto;" class="arrastrable" id="bueno">
+       			<img src="src/nutricion/item_21.png" style="max-width:15%;height:auto;" class="arrastrable" id="malo">
+       			<img src="src/nutricion/item_22.png" style="max-width:15%;height:auto;" class="arrastrable" id="bueno">
+	       		<img src="src/nutricion/item_15.png" style="max-width:15%;height:auto;" class="arrastrable" id="bueno"> 
+       		</div>
+       		<div id="items">
+	           <img src="src/actividadfisica.png" style="max-width:40%;height:auto;" onclick="openItems('fisica')">
+	           <img src="src/nutricion.png" style="max-width:40%;height:auto;" onclick="openItems('nutricion')"><br />
+               <img src="../images/atras.png" style="max-width:30%;height:auto;" onclick="inicio()" />
+
+	        </div>
+       </article>
+    </section>
+    <section class="avatar">
+       <article>
+           <img src="src/nino_bueno.png" style="max-width:100%;height:auto;" class="suelta">
+       </article>
+    </section>
+    <section class="pbar">
+
+    	<div id="bar" class="progress-bar shine">
+    		
+    		<img src="img/heart.png" style="max-width:100%;height:auto;position: absolute;top: -40%;width: 25%;right: -4%;z-index: 1">
+		    <span style="width: 75%;"></span>
+		</div>
+
+    </section>
+    
+</body>
+</html>
+
