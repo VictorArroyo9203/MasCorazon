@@ -27,7 +27,7 @@
         });
 
         function consultarEncuesta() {
-            var url = "http://190.109.185.138:8051/"
+            var url = "http://190.25.249.198:8041/php/"
             $.ajax({
                 type: "POST",
                 url: url,
@@ -162,7 +162,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "http://190.109.185.138:8051/?leer=administrador/calcularTest",
+                url: "http://190.25.249.198:8041/php/?leer=administrador/calcularTest",
                 data: data
             })
                     .done(function (msg) {
@@ -441,7 +441,7 @@
             $.ajax({
                 cache: false,
                 type: "POST",
-                url: "http://190.109.185.138:8086/Service1.svc/" + "Update_Usuarios",
+                url: "http://190.25.249.198:8041/Service1.svc/" + "Update_Usuarios",
                 data: { 'Cl': JSON.stringify(_Cl) },
                 contentType: "application/json; charset=utf-8",
                 dataType: "jsonp",

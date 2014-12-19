@@ -26,11 +26,11 @@
 <preference name="android-minSdkVersion" value="7" />		
 <preference name="android-installLocation" value="internalOnly" />		
 <preference name="SplashScreenDelay" value="5000" />	
+
 <preference name="StatusBarOverlaysWebView" value="false"/>
-
 <preference name="StatusBarBackgroundColor" value="#000000"/>
+<preference name="StatusBarStyle" value="default" />
 
-<preference name="StatusBarStyle" value="lightcontent" />	
 <preference name="ErrorUrl" value=""/>		
 <preference name="BackgroundColor" value="0x000000"/>		
 <preference name="KeepRunning" value="true"/>		
